@@ -5,8 +5,8 @@ import java.io.IOException;
  */
 public class part1 {
     public static void main (String[] args) throws IOException {
-        //triangle triangle = new triangle();
+        triangle triangle = new triangle();
         diamond diamonds = new diamond();
-       // fizzBuzzPrime fizzPrime = new fizzBuzzPrime();
+        fizzBuzzPrime fizzPrime = new fizzBuzzPrime();
     }
 }
