@@ -46,7 +46,7 @@ public class books {
                     System.out.println("\nsuccessfully checked out " + books.get(i).getTitle());
                     System.out.println();
                 }else
-                    System.err.println("Failure");
+                    System.err.println("Book is currently unavailable");
             }
             i++;
         }
@@ -61,7 +61,7 @@ public class books {
                    System.out.print("\nsuccessfully returned " + books.get(i).getTitle());
                    System.out.println();
                }else
-                   System.err.println("Failure");
+                   System.err.println("The book was unable to be returned");
            }
            i++;
        }
