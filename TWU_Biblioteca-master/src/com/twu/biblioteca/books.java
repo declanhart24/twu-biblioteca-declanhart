@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -30,7 +29,7 @@ public class books {
                 System.out.format("%-2d%10s%32s%20d", books.get(i).getID(), books.get(i).getTitle() ,books.get(i).getAuthor(), books.get(i).getYear_published());
                 System.out.println();
             }else {
-                System.out.println("No Books checked currently in");
+                System.err.println("No Books checked currently in");
             }
             i++;
         }
@@ -43,12 +42,28 @@ public class books {
         while (i < books.size()) {
             if (books.get(i).isChecked() && books.get(i).getID() == id) {
                 Boolean success = books.get(i).check(false);
-                if (success)
-                    System.out.print("successfully checked out " + books.get(i).getTitle());
-                else
-                    System.out.println("Failure");
+                if (success) {
+                    System.out.println("\nsuccessfully checked out " + books.get(i).getTitle());
+                    System.out.println();
+                }else
+                    System.err.println("Failure");
             }
             i++;
         }
     }
+
+   public void returnBook (int id) {
+       int i = 0;
+       while (i < books.size()) {
+           if (books.get(i).getID() == id) {
+               Boolean success = books.get(i).check(true);
+               if (success) {
+                   System.out.print("\nsuccessfully returned " + books.get(i).getTitle());
+                   System.out.println();
+               }else
+                   System.err.println("Failure");
+           }
+           i++;
+       }
+   }
 }
