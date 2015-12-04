@@ -11,7 +11,7 @@ public class books {
 
     public books () {
         books = new LinkedList<book>();
-        books.add(new book("Head First Java", "Kathy Sierra & Bert Bates", 2005));
+        books.add(new book(1, "Head First Java", "Kathy Sierra & Bert Bates", 2005));
     }
 
     public void getBooks () {
@@ -27,10 +27,28 @@ public class books {
         int i = 0;
         while (i < books.size()) {
             if(books.get(i).isChecked()) {
-                System.out.format("%-2s%32s%20d", books.get(i).getTitle(), books.get(i).getAuthor(), books.get(i).getYear_published());
-                i++;
+                System.out.format("%-2d%10s%32s%20d", books.get(i).getID(), books.get(i).getTitle() ,books.get(i).getAuthor(), books.get(i).getYear_published());
+                System.out.println();
+            }else {
+                System.out.println("No Books checked currently in");
             }
+            i++;
         }
 
+    }
+
+
+    public void checkOut (int id) {
+        int i = 0;
+        while (i < books.size()) {
+            if (books.get(i).isChecked() && books.get(i).getID() == id) {
+                Boolean success = books.get(i).check(false);
+                if (success)
+                    System.out.print("successfully checked out " + books.get(i).getTitle());
+                else
+                    System.out.println("Failure");
+            }
+            i++;
+        }
     }
 }
