@@ -10,9 +10,12 @@ public class system {
     private String [] options;
     private books library;
     private boolean active = true;
-    public system () throws IOException{
+    public system () throws IOException {
         library = new books();
         create_options();
+    }
+
+    public void run() throws IOException{
         welcome();
         while (active) {
             int result = menu();

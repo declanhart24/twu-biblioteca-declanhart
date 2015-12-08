@@ -1,22 +1,37 @@
 package com.twu.biblioteca;
 
 
+import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
 public class ExampleTest {
+    system system;
+    ByteArrayInputStream input;
+    ByteArrayOutputStream output;
 
-    @Test
-    public void test() {
-        assertEquals(1, 1);
+    @Before
+    public void setup () throws IOException{
+        system = new system();
+        input = new ByteArrayInputStream(new byte[20]);
+        output = new ByteArrayOutputStream(20);
+
+
     }
 
     @Test
     public void testWelcome () throws IOException{
-        assertEquals("Welcome to Biblioteca", new system().welcome());
+        assertEquals("Welcome to Biblioteca", system.welcome());
+    }
+
+    @Test
+    public void testListBooks () {
+        input.
     }
 
 }
