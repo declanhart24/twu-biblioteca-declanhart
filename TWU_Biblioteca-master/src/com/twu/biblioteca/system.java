@@ -1,7 +1,5 @@
 package com.twu.biblioteca;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * Created by declanhart on 30/11/2015.
@@ -10,6 +8,8 @@ public class system {
     private String [] options;
     private books library;
     private boolean active = true;
+    private InputStream in;
+    private OutputStream out;
     public system () throws IOException {
         library = new books();
         create_options();
@@ -77,12 +77,13 @@ public class system {
     private int checkBook () {
         System.out.print("\nPlease enter the book's ID number: ");
         int i = 0;
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        try{
-            i = Integer.parseInt(br.readLine());
-        }catch(Exception nfe){
-
-        }
+        char c;
+    //    try {
+     //       while (i = in.read() != "\n");
+   //     } catch (IOException e) {
+    //        e.printStackTrace();
+     //   }
+     //   i = Character.getNumericValue(c);
         return i;
     }
 

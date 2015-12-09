@@ -37,33 +37,36 @@ public class books {
     }
 
 
-    public void checkOut (int id) {
+    public String checkOut (int id) {
         int i = 0;
+        String output = "";
         while (i < books.size()) {
             if (books.get(i).isChecked() && books.get(i).getID() == id) {
                 Boolean success = books.get(i).check(false);
                 if (success) {
-                    System.out.println("\nsuccessfully checked out " + books.get(i).getTitle());
-                    System.out.println();
+                    output = "\nsuccessfully checked out " + books.get(i).getTitle() + "\n";
                 }else
-                    System.err.println("Book is currently unavailable");
+                    output = "Book is currently unavailable";
             }
             i++;
         }
+        return output;
     }
 
-   public void returnBook (int id) {
+   public String returnBook (int id) {
        int i = 0;
+       String output = "";
        while (i < books.size()) {
            if (books.get(i).getID() == id) {
                Boolean success = books.get(i).check(true);
                if (success) {
-                   System.out.print("\nsuccessfully returned " + books.get(i).getTitle());
-                   System.out.println();
+                   output = "\nsuccessfully returned " + books.get(i).getTitle() + "\n";
+
                }else
-                   System.err.println("The book was unable to be returned");
+                   output = "The book was unable to be returned";
            }
            i++;
        }
+       return output;
    }
 }

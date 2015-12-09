@@ -8,12 +8,14 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import static org.junit.Assert.assertEquals;
 
 public class ExampleTest {
     system system;
-    ByteArrayInputStream input;
+    books books;
+    InputStream input;
     ByteArrayOutputStream output;
 
     @Before
@@ -21,7 +23,7 @@ public class ExampleTest {
         system = new system();
         input = new ByteArrayInputStream(new byte[20]);
         output = new ByteArrayOutputStream(20);
-
+        books = new books();
 
     }
 
@@ -30,10 +32,10 @@ public class ExampleTest {
         assertEquals("Welcome to Biblioteca", system.welcome());
     }
 
-    @Test
+  /**  @Test
     public void testListBooks () {
-        String testInput = "1\n1\n";
-//        testInput.toByteArray
+        byte[] testInput = "1\n1\n".getBytes();
+        input = new ByteArrayInputStream(testInput);
         String expectedOutput =
         "1 Head First Java       Kathy Sierra & Bert Bates                2005\n\n" +
         "Please Select from the following options\n\n" +
@@ -44,5 +46,15 @@ public class ExampleTest {
         "Please enter the corresponding menu item number:";
         assertEquals(expectedOutput, system.menu());
     }
+  **/
 
+    @Test
+    public void testCheckOut () {
+        assertEquals("\nsuccessfully checked out Head First Java\n", books.checkOut(1));
+    }
+    @Test
+    public void testReturnBook () {
+        books.checkOut(1);
+        assertEquals("\nsuccessfully returned Head First Java\n" , books.returnBook(1));
+    }
 }
