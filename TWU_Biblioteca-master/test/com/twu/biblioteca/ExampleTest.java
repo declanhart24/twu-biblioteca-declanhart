@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,9 +51,21 @@ public class ExampleTest {
     public void testCheckOut () {
         assertEquals("\nsuccessfully checked out Head First Java\n", books.checkOut(1));
     }
+
     @Test
-    public void testReturnBook () {
+    public void testFailedCheckOut () {
+        books.checkOut(1);
+        assertEquals("Book is currently unavailable", books.checkOut(1));
+    }
+
+    @Test
+    public void testSuccessfulReturnBook () {
         books.checkOut(1);
         assertEquals("\nsuccessfully returned Head First Java\n" , books.returnBook(1));
+    }
+
+    @Test
+    public void testFailedReturnBook () {
+        assertEquals("The book was unable to be returned" , books.returnBook(1));
     }
 }

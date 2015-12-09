@@ -47,7 +47,8 @@ public class books {
                     output = "\nsuccessfully checked out " + books.get(i).getTitle() + "\n";
                 }else
                     output = "Book is currently unavailable";
-            }
+            } else
+                output = "Book is currently unavailable";
             i++;
         }
         return output;
