@@ -5,35 +5,41 @@ import java.util.LinkedList;
 /**
  * Created by declanhart on 30/11/2015.
  */
-public class books {
+public class library{
     private LinkedList<book> books;
+    private LinkedList<dvd> dvds;
 
-    public books () {
+    public library () {
         books = new LinkedList<book>();
+        dvds = new LinkedList<dvd>();
         books.add(new book(1, "Head First Java", "Kathy Sierra & Bert Bates", 2005));
+        dvds.add(new dvd(1, "Finding Nemo", 2003, " Andrew Stanton, Lee Unkrich", 8));
     }
 
-    public void getBooks () {
+    public String getBookTitles () {
         int i = 0;
+        String output = "";
         while (i < books.size()) {
             if (books.get(i).isChecked()) {
-                System.out.println(books.get(i).getAuthor());
-            }
-        }
-    }
-
-    public void getBooksCheckedWithDetail (){
-        int i = 0;
-        while (i < books.size()) {
-            if(books.get(i).isChecked()) {
-                System.out.format("%-2d%10s%32s%20d", books.get(i).getID(), books.get(i).getTitle() ,books.get(i).getAuthor(), books.get(i).getYear_published());
-                System.out.println();
-            }else {
-                System.err.println("No Books checked currently in");
+                output += books.get(i).getTitle() + "\n";
             }
             i++;
         }
+        return output;
+    }
 
+    public String getBooksCheckedWithDetail (){
+        int i = 0;
+        String output = "";
+        while (i < books.size()) {
+            if(books.get(i).isChecked()) {
+                output += String.format("%1$1s %2$2s %3$30s %4$20s", books.get(i).getID(), books.get(i).getTitle(), books.get(i).getAuthor(), books.get(i).getYear_published() + "\n");
+            }
+            i++;
+        }
+        if (output.equals(""))
+            output = "No Books checked currently in";
+        return output;
     }
 
 
@@ -45,8 +51,7 @@ public class books {
                 Boolean success = books.get(i).check(false);
                 if (success) {
                     output = "\nsuccessfully checked out " + books.get(i).getTitle() + "\n";
-                }else
-                    output = "Book is currently unavailable";
+                }
             } else
                 output = "Book is currently unavailable";
             i++;

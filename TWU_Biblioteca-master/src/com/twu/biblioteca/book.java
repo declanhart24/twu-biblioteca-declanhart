@@ -46,7 +46,7 @@ public class book {
         } else if (inOut == true) {
             checked = true;
             return true;
-        }
+        } else
         return false;
     }
 

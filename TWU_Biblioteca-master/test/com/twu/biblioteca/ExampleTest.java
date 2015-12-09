@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ExampleTest {
     system system;
-    books books;
+    library books;
     InputStream input;
     ByteArrayOutputStream output;
 
@@ -22,7 +22,7 @@ public class ExampleTest {
         system = new system();
         input = new ByteArrayInputStream(new byte[20]);
         output = new ByteArrayOutputStream(20);
-        books = new books();
+        books = new library();
 
     }
 
@@ -67,5 +67,21 @@ public class ExampleTest {
     @Test
     public void testFailedReturnBook () {
         assertEquals("The book was unable to be returned" , books.returnBook(1));
+    }
+
+    @Test
+    public void testGetBookTitle () {
+        assertEquals("Head First Java\n", books.getBookTitles());
+    }
+
+    @Test
+    public void testGetBooksWithDetail () {
+        assertEquals("1 Head First Java      Kathy Sierra & Bert Bates                2005\n", books.getBooksCheckedWithDetail());
+    }
+
+    @Test
+    public void testFailedGetBooksWithDetail () {
+        books.checkOut(1);
+        assertEquals("No Books checked currently in", books.getBooksCheckedWithDetail());
     }
 }

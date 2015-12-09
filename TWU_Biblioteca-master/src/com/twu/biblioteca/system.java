@@ -6,13 +6,13 @@ import java.io.*;
  */
 public class system {
     private String [] options;
-    private books library;
+    private library library;
     private boolean active = true;
     private InputStream in;
     private OutputStream out;
     public system () throws IOException {
-        library = new books();
-        create_options();
+        library = new library();
+        options = create_options();
     }
 
     public void run() throws IOException{
@@ -44,12 +44,13 @@ public class system {
         return welcome;
     }
 
-    private void create_options (){
-        options = new String [5];
-        options[0] = "List Books";
-        options[1] = "Check out a book";
-        options[2] = "Return a book";
-        options[options.length - 1] = "Exit";
+    private String [] create_options (){
+        String [] output = new String [5];
+        output[0] = "List Books";
+        output[1] = "Check out a book";
+        output[2] = "Return a book";
+        output[output.length - 1] = "Quit";
+        return output;
     }
 
     private int menu () throws IOException{
