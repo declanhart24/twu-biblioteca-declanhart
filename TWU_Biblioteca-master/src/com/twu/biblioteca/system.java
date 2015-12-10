@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 import java.io.*;
+import java.util.Scanner;
 
 /**
  * Created by declanhart on 30/11/2015.
@@ -10,30 +11,61 @@ public class system {
     private boolean active = true;
     private InputStream in;
     private OutputStream out;
+    private users users;
+    private boolean loggedIn = false;
+    private Scanner sc = new Scanner(System.in);
+
     public system () throws IOException {
         library = new library();
-        options = create_options();
+        options = loginMenu();
+        users = new users();
     }
 
-    public void run() throws IOException{
+    public void run() throws IOException {
         welcome();
         while (active) {
-            int result = menu();
-            if (result == 0) {
-                System.err.println("Select a valid option!");
-                result = menu();
-            } else if (result == 1) {
-                listBooks();
-            } else if (result == 2) {
-                checkOutBook();
-            } else if (result == 3) {
-                returnBook();
-            } else if (result ==  options.length){
-                System.out.println("\n Thank you for using Bibliotca");
-                active = false;
-                System.exit(0);
-            }
+            if (loggedIn) {
+                createLoggedInOptions();
 
+                int result = menu();
+                if (result == 0) {
+                    System.err.println("Select a valid option!");
+                    result = menu();
+                } else if (result == 1) {
+                    listBooks();
+                } else if (result == 2) {
+                    checkOutBook();
+                } else if (result == 3) {
+                    returnBook();
+                } else if (result == options.length) {
+                    System.out.println("\n Thank you for using Bibliotca");
+                    active = false;
+                    System.exit(0);
+                }
+
+
+            } else {
+                int result = menu();
+                if (result == 0) {
+                    System.err.println("Select a valid option!");
+                    result = menu();
+                } else if (result == 1) {
+                    //listItems("book");
+                } else if (result == 2) {
+                    //listItems("DVD");
+                } else if (result == 3) {
+                    System.out.print("Please enter your library number: ");
+                    String id = sc.nextLine();
+                    System.out.print("Please enter your Password");
+                    String pwd = sc.nextLine();
+                    if (login(id, pwd))
+                        loggedIn = true;
+                } else if (result == options.length) {
+                    System.out.println("\n Thank you for using Bibliotca");
+                    active = false;
+                    System.exit(0);
+                }
+            }
         }
     }
 
@@ -44,13 +76,28 @@ public class system {
         return welcome;
     }
 
-    private String [] create_options (){
-        String [] output = new String [5];
+    private String [] loginMenu() {
+        String [] output = new String [4];
         output[0] = "List Books";
-        output[1] = "Check out a book";
-        output[2] = "Return a book";
+        output[1] = "List DVD's";
+        output[2] = "Login";
         output[output.length - 1] = "Quit";
         return output;
+    }
+    private String [] createLoggedInOptions (){
+        String [] output = new String [7];
+        output[0] = "List Books";
+        output[1] = "List DVD's";
+        output[2] = "Check out a book";
+        output[3] = "Return a book";
+        output[4] = "Check out a DVD";
+        output[5] = "return a DVD";
+        output[output.length - 1] = "Quit";
+        return output;
+    }
+
+    public boolean login (String libraryId, String pwd) {
+        return users.checkCredentials(libraryId, pwd);
     }
 
     private int menu () throws IOException{
@@ -89,11 +136,11 @@ public class system {
     }
 
     private void checkOutBook () {
-        library.checkOut(checkBook());
+        library.checkOut(checkBook(), "book");
     }
 
     public void returnBook () {
-        library.returnBook(checkBook());
+        library.returnItem(checkBook(), "book");
     }
 
 }

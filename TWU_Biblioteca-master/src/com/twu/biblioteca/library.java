@@ -27,7 +27,6 @@ public class library{
         }
         return output;
     }
-
     public String getBooksCheckedWithDetail (){
         int i = 0;
         String output = "";
@@ -43,7 +42,14 @@ public class library{
     }
 
 
-    public String checkOut (int id) {
+    public String checkOut (int id, String type) {
+        if (type == "book")
+            return checkOutBook(id);
+        else
+            return checkOutDVD(id);
+    }
+
+    private String checkOutBook (int id) {
         int i = 0;
         String output = "";
         while (i < books.size()) {
@@ -59,7 +65,30 @@ public class library{
         return output;
     }
 
-   public String returnBook (int id) {
+    private String checkOutDVD (int id) {
+        int i = 0;
+        String output = "";
+        while (i < dvds.size()) {
+            if (dvds.get(i).isChecked() && dvds.get(i).getID() == id) {
+                Boolean success = dvds.get(i).check(false);
+                if (success) {
+                    output = "\nsuccessfully checked out " + dvds.get(i).getTitle() + "\n";
+                }
+            } else
+                output = "DVD is currently unavailable";
+            i++;
+        }
+        return output;
+    }
+
+   public String returnItem (int id, String type) {
+       if (type == "book")
+           return returnBook(id);
+       else
+           return returnDVD(id);
+   }
+
+    private String returnBook (int id){
        int i = 0;
        String output = "";
        while (i < books.size()) {
@@ -75,4 +104,22 @@ public class library{
        }
        return output;
    }
+
+    private String returnDVD (int id) {
+        int i = 0;
+        String output = "";
+        while (i < dvds.size()) {
+            if (dvds.get(i).getID() == id) {
+                Boolean success = dvds.get(i).check(true);
+                if (success) {
+                    output = "\nsuccessfully returned " + dvds.get(i).getTitle() + "\n";
+
+                }else
+                    output = "The DVD was unable to be returned";
+            }
+            i++;
+        }
+        return output;
+    }
+
 }
