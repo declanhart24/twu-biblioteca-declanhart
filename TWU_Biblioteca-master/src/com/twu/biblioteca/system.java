@@ -12,8 +12,11 @@ public class system {
     private InputStream in;
     private OutputStream out;
     private users users;
+    private String userID;
     private boolean loggedIn = false;
     private Scanner sc = new Scanner(System.in);
+    protected String book = "book";
+    protected String DVD = "DVD";
 
     public system () throws IOException {
         library = new library();
@@ -25,18 +28,26 @@ public class system {
         welcome();
         while (active) {
             if (loggedIn) {
-                createLoggedInOptions();
+                options = createLoggedInOptions();
 
                 int result = menu();
                 if (result == 0) {
                     System.err.println("Select a valid option!");
                     result = menu();
                 } else if (result == 1) {
-                    listBooks();
+                    listItems(book);
                 } else if (result == 2) {
-                    checkOutBook();
+                    listItems(DVD);
                 } else if (result == 3) {
-                    returnBook();
+                    checkOutItem(book);
+                } else if (result == 4) {
+                    returnItem(book);
+                } else if (result == 5) {
+                    checkOutItem(DVD);
+                } else if (result == 6) {
+                    returnItem(DVD);
+                } else if (result == 7) {
+                    System.out.print(getInformation());
                 } else if (result == options.length) {
                     System.out.println("\n Thank you for using Bibliotca");
                     active = false;
@@ -50,9 +61,9 @@ public class system {
                     System.err.println("Select a valid option!");
                     result = menu();
                 } else if (result == 1) {
-                    //listItems("book");
+                    listItems(book);
                 } else if (result == 2) {
-                    //listItems("DVD");
+                    listItems(DVD);
                 } else if (result == 3) {
                     System.out.print("Please enter your library number: ");
                     String id = sc.nextLine();
@@ -85,19 +96,23 @@ public class system {
         return output;
     }
     private String [] createLoggedInOptions (){
-        String [] output = new String [7];
+        String [] output = new String [8];
         output[0] = "List Books";
         output[1] = "List DVD's";
         output[2] = "Check out a book";
         output[3] = "Return a book";
         output[4] = "Check out a DVD";
         output[5] = "return a DVD";
+        output[6] = "User information";
         output[output.length - 1] = "Quit";
         return output;
     }
 
     public boolean login (String libraryId, String pwd) {
-        return users.checkCredentials(libraryId, pwd);
+        boolean output = users.checkCredentials(libraryId, pwd);
+        if (output)
+            userID = libraryId;
+        return output;
     }
 
     private int menu () throws IOException{
@@ -118,29 +133,28 @@ public class system {
         return i;
     }
 
-    private void listBooks () {
-        library.getBooksCheckedWithDetail();
+    public String getInformation () {
+        return users.getUserInformation(userID);
+    }
+
+    private void listItems (String type) {
+        if (type.equals(book))
+            System.out.print(library.getBooksCheckedWithDetail());
+        else
+            System.out.print(library.getDVDsCheckedWithDetail());
     }
 
     private int checkBook () {
         System.out.print("\nPlease enter the book's ID number: ");
-        int i = 0;
-        char c;
-    //    try {
-     //       while (i = in.read() != "\n");
-   //     } catch (IOException e) {
-    //        e.printStackTrace();
-     //   }
-     //   i = Character.getNumericValue(c);
-        return i;
+        return sc.nextInt();
     }
 
-    private void checkOutBook () {
-        library.checkOut(checkBook(), "book");
+    private void checkOutItem (String type) {
+        System.out.print(library.checkOut(checkBook(), type));
     }
 
-    public void returnBook () {
-        library.returnItem(checkBook(), "book");
+    public void returnItem (String type) {
+        System.out.print(library.returnItem(checkBook(), type));
     }
 
 }

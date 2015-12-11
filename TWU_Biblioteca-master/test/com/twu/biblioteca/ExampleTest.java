@@ -17,6 +17,8 @@ public class ExampleTest {
     InputStream input;
     ByteArrayOutputStream output;
     users users;
+    private String libraryNumber;
+    private String password;
 
     @Before
     public void setup () throws IOException{
@@ -25,6 +27,8 @@ public class ExampleTest {
         output = new ByteArrayOutputStream(20);
         books = new library();
         users = new users();
+        libraryNumber = "111-1111";
+        password = "TWU";
     }
 
     @Test
@@ -116,5 +120,14 @@ public class ExampleTest {
     @Test
     public void testLogin () {
         assertEquals(true, system.login("111-1111", "TWU"));
+    }
+
+    @Test
+    public void testGetUserInformation () {
+        system.login(libraryNumber, password);
+        String expectedResult = "Name: Declan Hart\n" +
+                "Email: declanhart24@gmail.com\n" +
+                "Phone Number: 0434 959 654\n";
+        assertEquals(expectedResult, system.getInformation());
     }
 }

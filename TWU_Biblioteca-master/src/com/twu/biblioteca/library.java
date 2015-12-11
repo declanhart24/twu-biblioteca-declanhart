@@ -41,6 +41,20 @@ public class library{
         return output;
     }
 
+    public String getDVDsCheckedWithDetail (){
+        int i = 0;
+        String output = "";
+        while (i < dvds.size()) {
+            if(dvds.get(i).isChecked()) {
+                output += String.format("%1$1s %2$2s %3$30s %4$20s", dvds.get(i).getID(), dvds.get(i).getTitle(), dvds.get(i).getDirector(), dvds.get(i).getYear() + "\n");
+            }
+            i++;
+        }
+        if (output.equals(""))
+            output = "No DVDs checked currently in";
+        return output;
+    }
+
 
     public String checkOut (int id, String type) {
         if (type == "book")

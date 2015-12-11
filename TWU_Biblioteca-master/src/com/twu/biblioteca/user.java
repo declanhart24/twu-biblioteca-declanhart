@@ -11,16 +11,19 @@ public class user {
     private String password;
     private String name;
     private String email;
-    private Date dateOfBirth;
+
+
+
+    private String phoneNumber;
     private LinkedList<book> borrowedBooks;
     private LinkedList<dvd> borrowedDVDs;
 
-    public user (String number, String password, String name, String email, Date DOB) {
+    public user (String number, String password, String name, String email, String phoneNumber) {
         this.libraryNumber = number;
         this.password = password;
         this.name = name;
         this.email = email;
-        this.dateOfBirth = DOB;
+        this.phoneNumber = phoneNumber;
         this.borrowedBooks = new LinkedList<book>();
         this.borrowedDVDs = new LinkedList<dvd>();
     }
@@ -57,13 +60,7 @@ public class user {
         this.email = email;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-
 }
