@@ -65,7 +65,7 @@ public class ExampleTest {
 
     @Test
     public void testCheckOut () {
-        assertEquals("\nsuccessfully checked out Head First Java\n", books.checkOut(1, "book"));
+        assertEquals("Head First Java", books.checkOut(1, "book"));
     }
 
     @Test
@@ -129,5 +129,10 @@ public class ExampleTest {
                 "Email: declanhart24@gmail.com\n" +
                 "Phone Number: 0434 959 654\n";
         assertEquals(expectedResult, system.getInformation());
+    }
+
+    @Test
+    public void addItemToUserAccount () {
+        assertEquals(true, users.checkOut("111-1111", "Head First Java"));
     }
 }

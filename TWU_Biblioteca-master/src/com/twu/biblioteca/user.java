@@ -15,8 +15,7 @@ public class user {
 
 
     private String phoneNumber;
-    private LinkedList<book> borrowedBooks;
-    private LinkedList<dvd> borrowedDVDs;
+    private LinkedList<String> borrowedItems;
 
     public user (String number, String password, String name, String email, String phoneNumber) {
         this.libraryNumber = number;
@@ -24,8 +23,7 @@ public class user {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.borrowedBooks = new LinkedList<book>();
-        this.borrowedDVDs = new LinkedList<dvd>();
+        this.borrowedItems = new LinkedList<String>();
     }
 
     public String getLibraryNumber() {
@@ -62,5 +60,9 @@ public class user {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public void addItem (String item) {
+            borrowedItems.add(item);
     }
 }

@@ -38,4 +38,16 @@ public class users {
         }
         return output;
     }
+
+    public boolean checkOut (String UID, String item) {
+        int i = 0;
+        while (i < users.size()){
+            if (users.get(i).getLibraryNumber().equals(UID)) {
+                users.get(i).addItem(item);
+                return true;
+            }
+        i++;
+        }
+        return false;
+    }
 }

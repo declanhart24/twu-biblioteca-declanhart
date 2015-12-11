@@ -70,7 +70,7 @@ public class library{
             if (books.get(i).isChecked() && books.get(i).getID() == id) {
                 Boolean success = books.get(i).check(false);
                 if (success) {
-                    output = "\nsuccessfully checked out " + books.get(i).getTitle() + "\n";
+                    output = books.get(i).getTitle().toString();
                 }
             } else
                 output = "Book is currently unavailable";

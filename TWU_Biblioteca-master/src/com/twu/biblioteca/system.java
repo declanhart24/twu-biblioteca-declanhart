@@ -150,7 +150,12 @@ public class system {
     }
 
     private void checkOutItem (String type) {
-        System.out.print(library.checkOut(checkBook(), type));
+        String bookTitle = library.checkOut(checkBook(), type);
+        if (!bookTitle.equals("Book is currently unavailable")) {
+            System.out.print("\nSuccessfully checked out " + bookTitle + "\n");
+
+        } else
+            System.out.println("Book is currently unavailable");
     }
 
     public void returnItem (String type) {
